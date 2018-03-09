@@ -8,7 +8,7 @@ class LoginForm extends Component {
     super(props);
 
     this.state = {
-      sexes : [
+      genders : [
           {
             key: 1,
             value: 1,
@@ -26,6 +26,15 @@ class LoginForm extends Component {
           }
         ],
 
+      countries: [
+        {
+          key: 1,
+          value: 1,
+          text: "Bosna i Hercegovina",
+        }
+      ],
+
+      userName: '',
       firstName: '',
       lastName: '',
       password: '',
@@ -33,7 +42,8 @@ class LoginForm extends Component {
       email: '',
       confirmedEmail: '',
       age: '',
-      sex: '',
+      gender: '',
+      country: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,14 +51,15 @@ class LoginForm extends Component {
     this.resetValues = this.resetValues.bind(this);
   }
 
-  sendSignUpRequest(firstName, lastName, password, email, age, sex){
+  sendSignUpRequest(firstName, lastName, password, email, age, gender, country){
     const userRequest = {
       firstName,
       lastName,
       password,
       email,
       age,
-      sex
+      gender,
+      country,
     };
 
     /*
@@ -82,17 +93,31 @@ class LoginForm extends Component {
       email: '',
       confirmedEmail: '',
       age: '',
-      sex: '',
+      gender: '',
+      country: '',
     });
   }
 
   render(){
     return (
       <div>
-        <Header as="h1">Sign up</Header>
+        <Header as="h1">SoChat</Header>
 
       <Segment.Group raised>
       <Form>
+      <Header as="h3">Sign Up</Header>
+      <Form.Group widths="equal">
+            <Form.Field>
+              <label>Username</label>
+              <input
+                  placeholder='Username'
+                  value={this.state.username}
+                  onChange={(e) => this.setState({ userName: e.target.value })}
+              />
+            </Form.Field>
+            <Form.Field>
+            </Form.Field>
+        </Form.Group>
       <Form.Group widths="equal">
             <Form.Field>
               <label>First Name</label>
@@ -163,10 +188,18 @@ class LoginForm extends Component {
                     />
                   </Form.Field>
                   <Form.Dropdown
-                    label="Sex"
-                    name="sex"
-                    value={this.state.sex}
-                    options={this.state.sexes}
+                    label="Gender"
+                    name="gender"
+                    value={this.state.gender}
+                    options={this.state.genders}
+                    onChange={this.handleInputChange}
+                  />
+
+                  <Form.Dropdown
+                    label="Country"
+                    name="country"
+                    value={this.state.country}
+                    options={this.state.countries}
                     onChange={this.handleInputChange}
                   />
               </Form.Group>
@@ -177,7 +210,14 @@ class LoginForm extends Component {
             type='submit'
             onClick={
               () => {
-                  this.sendSignUpRequest();
+                  this.sendSignUpRequest(
+                    this.state.firstName,
+                    this.state.lastName,
+                    this.state.password,
+                    this.state.email,
+                    this.state.age,
+                    this.state.gender,
+                  );
               }
             }
         >

@@ -5,7 +5,7 @@
 <section class="main-container">
 
     <div class="main-wrapper">
-        <h2>Home</h2>
+        <h2>Uspjelo je</h2>
     </div>
 
 </section>

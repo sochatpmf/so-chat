@@ -12,7 +12,22 @@ include_once "header.php";
             <input type="text" name="phone" placeholder="phone number">
             <input type="text" name="age" placeholder="age">
             <input type="text" name="gender" placeholder="gender">
-            <input type="text" name="country" placeholder="country">
+            <!-- <input type="text" name="country" placeholder="country"> -->
+
+            <select name="country">
+                <?php
+
+                    include_once "includes/dbh.inc.php";
+
+                    $query = "select name from lkp_country";
+                    $result = mysqli_query($connection, $query);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        printf("<option>%s</option>", $row["name"]);
+                    }
+                ?>
+            </select>
+
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
             <input type="text" name="mail" placeholder="email">
